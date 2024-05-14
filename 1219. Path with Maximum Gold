@@ -1,0 +1,38 @@
+class Solution {
+public:
+    int del[5] = {0, -1, 0, 1, 0};
+
+    void dfs(int row, int col, vector<vector<int>>& grid, vector<vector<int>>& vis, int currSum, int& maxSum) {
+        vis[row][col] = 1;
+        currSum += grid[row][col];
+        maxSum = max(maxSum, currSum);
+
+        for (int i = 0; i < 4; i++) {
+            int r = row + del[i];
+            int c = col + del[i + 1];
+
+            if (r >= 0 && r < grid.size() && c >= 0 && c < grid[0].size() && grid[r][c] != 0 && vis[r][c] == 0) {
+                dfs(r, c, grid, vis, currSum, maxSum);
+            }
+        }
+
+        vis[row][col] = 0;  // Backtrack
+    }
+
+    int getMaximumGold(vector<vector<int>>& grid) {
+        int n = grid.size();
+        int m = grid[0].size();
+        int maxSum = 0;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] != 0) {
+                    vector<vector<int>> vis(n, vector<int>(m, 0));
+                    dfs(i, j, grid, vis, 0, maxSum);
+                }
+            }
+        }
+
+        return maxSum;
+    }
+};
