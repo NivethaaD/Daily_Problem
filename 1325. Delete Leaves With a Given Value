@@ -1,0 +1,27 @@
+
+class Solution {
+public:
+    bool isLeaf(TreeNode* root, int target) {
+        return root->left == nullptr && root->right == nullptr && root->val == target;
+    }
+
+    void traversal(TreeNode* root, int target, TreeNode* par, int x) {
+        if (root == nullptr) return;
+        
+        traversal(root->left, target, root, 0);
+        traversal(root->right, target, root, 1);
+        
+        if (isLeaf(root, target)) {
+            if (par != nullptr) {  // Check if par is not null before accessing its members
+                if (x == 0) par->left = nullptr;
+                else par->right = nullptr;
+            }
+        }
+    }
+
+    TreeNode* removeLeafNodes(TreeNode* root, int target) {
+        traversal(root, target, nullptr, -1);
+        if (isLeaf(root, target)) return nullptr;
+        return root;
+    }
+};
