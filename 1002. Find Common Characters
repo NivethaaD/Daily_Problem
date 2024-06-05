@@ -1,0 +1,54 @@
+class Solution {
+public:
+    vector<string> commonChars(vector<string>& words) {
+
+        vector<string>ans;
+        map<char,int>mp1;
+        for(int i=0;i<words[0].size();i++)
+        {
+            mp1[words[0][i]]++;
+        }
+        for(int i=1;i<words.size();i++)
+        {
+            map<char,int>mp2;
+            for(char it : words[i])
+            {
+                mp2[it]++;
+            }
+        
+            for(auto k : mp2)
+            {
+                if(mp1[k.first])
+                {
+                    if(mp1[k.first] > k.second)
+                    {
+                        mp1[k.first]=k.second;
+                    }
+                }
+            }
+            for(auto k : mp1)
+            {
+                if(mp2[k.first]==0)
+                {
+                    mp1[k.first]=0;
+                }
+            }
+        }
+        for(auto it : mp1)
+        {
+            if(it.second!=0)
+            {
+                int x=it.second;
+                for(int i=0;i<x;i++)
+                {
+                    string temp="";
+                    temp=temp+it.first;
+                    ans.push_back(temp);
+                }
+               
+            }
+           
+        }
+        return ans;
+    }
+};
