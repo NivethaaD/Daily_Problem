@@ -1,0 +1,40 @@
+class Solution {
+public:
+    vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2) {
+        
+        vector<int>ans;
+        map<int,int>mp1;
+        for(auto it : arr1)
+        {
+            mp1[it]++;
+        }
+        for(auto it : arr2)
+        {
+            if(mp1[it])
+            {
+                int count=mp1[it];
+                while(count>0)
+                {
+                    ans.push_back(it);
+                    count=count-1;
+                }
+                mp1[it]=0;
+            }
+        }
+        for(auto it : mp1)
+        {
+            if(it.second>0)
+            {
+                int count=it.second;
+                while(count>0)
+                {
+                    ans.push_back(it.first);
+                    count=count-1;
+                }
+            }
+           
+        }
+
+        return ans;
+    }
+};
