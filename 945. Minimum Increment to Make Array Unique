@@ -1,0 +1,112 @@
+class Solution {
+public:
+    int minIncrementForUnique(vector<int>& nums) {
+        
+        // //TLE
+        // map<int,int>mp;
+        // for(auto i : nums)
+        // {
+        //     mp[i]++;
+        // }
+        // int ans=0;
+        // for(auto it : mp)
+        // {
+            
+        //     if(it.second>1)
+        //     {
+        //         int count=it.second;
+                
+        //         for(int i=count;i>1;i--)
+        //         {
+        //             int temp=it.first;
+        //             while(true)
+        //             {
+        //                 ans=ans+1;
+        //                 temp=temp+1;
+        //                 if(!mp[temp])
+        //                 {
+        //                     mp[temp]=1;
+        //                     break;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+        // return ans;
+        
+        // int ans=0;
+        // vector<int>v(pow(10,5),-1);
+        // sort(nums.begin(),nums.end());
+        // for(int i=0;i<nums.size();i++)
+        // {
+        //     v[nums[i]]=1;
+        // }
+
+        // vector<int>temp;
+        // for(int i=1;i<nums.size();i++)
+        // {
+        //     if(nums[i]==nums[i-1])
+        //     {
+        //         temp.push_back(nums[i]);
+        //     }
+        // }
+        // int j=0;
+        // for(int i=0;i<=pow(10,5);i++)
+        // {
+        //     if(j==temp.size())break;
+        //     if(i>=temp[j] && v[i]==-1)
+        //     {
+        //         ans=ans+abs(i-temp[j]);
+        //         j++;
+        //         v[i]=1;
+        //     }
+        // }
+        // return ans;
+
+
+        // // RunTime Error
+
+        //  int ans = 0;
+        // vector<int> v(100000, -1);
+        // sort(nums.begin(), nums.end());
+
+        // // Mark the positions in the vector v
+        // for (int i = 0; i < nums.size(); i++) {
+        //     v[nums[i]] = 1;
+        // }
+
+        // // Collect duplicates
+        // vector<int> temp;
+        // for (int i = 1; i < nums.size(); i++) {
+        //     if (nums[i] == nums[i-1]) {
+        //         temp.push_back(nums[i]);
+        //     }
+        // }
+
+        // int j = 0;
+        // for (int i = 1; i <= 100000; i++) {
+        //     if (j == temp.size()) break;
+        //     if (i >= temp[j] && v[i] == -1) {
+        //         ans = ans + abs(i - temp[j]);
+        //         j++;
+        //         v[i] = 1;
+        //     }
+        // }
+
+        // return ans;
+
+
+         int ans = 0;
+         sort(nums.begin(), nums.end());
+         for(int i = 1; i < nums.size(); i++)
+         {
+            if(nums[i] <= nums[i-1])
+            {
+                int diff=nums[i-1]-nums[i];
+                ans+=diff+1;
+                nums[i]+=diff+1;
+            }
+         }
+         return ans;
+    }
+};
