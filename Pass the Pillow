@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int passThePillow(int n, int time) {
+    int ans=1;
+    bool first=true;
+    while(time-- >0)
+    {
+        if(ans==n)
+        {
+            first=false;
+        }
+        if(ans==1)
+        {
+            first=true;
+        }
+        if(first)
+        {
+            ans++;
+        }
+        else
+        {
+            ans--;
+        }
+    }
+        return ans;
+    }
+};
