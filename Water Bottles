@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int numWaterBottles(int numBottles, int numExchange) {
+        
+        int drunk=0,emptyBottles,rem=0;
+        drunk=drunk+numBottles;
+        emptyBottles=numBottles;
+        while(emptyBottles>=numExchange)
+        {
+            int reFill=emptyBottles/numExchange;//3
+            emptyBottles=emptyBottles%numExchange; //3
+            drunk=drunk+reFill;
+            emptyBottles=emptyBottles+reFill;
+
+        }
+        return drunk;
+        
+
+
+
+    }
+};
