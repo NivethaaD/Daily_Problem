@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int minOperations(vector<string>& logs) {
+        
+        int step=0;
+        for(auto it : logs)
+        {
+            if(it=="../" && step!=0 )
+            {
+                cout<<"first"<<endl;
+                step--;
+            }
+            else if(it!="../" && it!="./")
+            {
+                 cout<<"second"<<endl;
+                step++;
+            }
+        }
+        return step;
+    }
+};
