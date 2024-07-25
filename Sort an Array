@@ -1,0 +1,48 @@
+class Solution {
+public:
+    void mergeSort(vector<int>& nums, int l, int r, vector<int>& aux) {
+        if (l < r) {
+            int m =( l + r )/ 2;
+            mergeSort(nums, l, m, aux);
+            mergeSort(nums, m + 1, r, aux);
+            merge(nums, l, m, r, aux);
+        }
+    }
+
+    void merge(vector<int>& nums, int l, int m, int r, vector<int>& aux) {
+        int i = l, j = m + 1, k = l;
+
+        while (i <= m && j <= r) {
+            if (nums[i] <= nums[j]) {
+                aux[k] = nums[i];
+                i++;
+            } else {
+                aux[k] = nums[j];
+                j++;
+            }
+            k++;
+        }
+
+        while (i <= m) {
+            aux[k] = nums[i];
+            i++;
+            k++;
+        }
+
+        while (j <= r) {
+            aux[k] = nums[j];
+            j++;
+            k++;
+        }
+
+        for (int x = l; x <= r; x++) {
+            nums[x] = aux[x];
+        }
+    }
+
+    vector<int> sortArray(vector<int>& nums) {
+        vector<int> aux(nums.size());
+        mergeSort(nums, 0, nums.size() - 1, aux);
+        return nums;
+    }
+};
