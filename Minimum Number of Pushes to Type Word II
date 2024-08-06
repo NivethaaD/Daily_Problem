@@ -1,0 +1,35 @@
+
+class Solution {
+public:
+int minimumPushes (string word) {
+
+    map<char,int>mp;
+
+    for(auto it:word)
+    {
+        mp[it]++;
+    }
+    vector<int>vec;
+    for(auto it:mp)
+    {
+        vec.push_back(it.second);
+    }
+
+    sort(vec.rbegin(),vec.rend());
+
+    int res=0,f=1, tempCount=0;
+
+    for(int i=0;i<vec.size();i++)
+    {
+        res+=(vec[i]*f);
+        tempCount++;
+        if(tempCount>=8)
+        {
+            f++;
+            tempCount=0;
+        }
+    
+    }
+    return res;
+   }
+};
