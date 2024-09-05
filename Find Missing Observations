@@ -1,0 +1,44 @@
+class Solution {
+public:
+    vector<int> missingRolls(vector<int>& rolls, int mean, int n) {
+
+        
+        int sumofN;
+        int sumofM=0;
+        int tot=rolls.size()+n;
+        for(auto it  : rolls)
+        {
+            sumofM=sumofM+it;
+        }
+        sumofN=(mean*tot)-sumofM;
+        // if(sumofN<=0)return {};
+        if (sumofN < n || sumofN > 6 * n) {
+            return {}; // Not possible to fill the array with valid rolls
+        }
+        vector<int>result(n,1);
+        sumofN=sumofN-n;
+
+        int i=0;
+        while(i<n && sumofN>0)
+        {
+        
+            if(sumofN>=5)
+            {
+                result[i]=result[i]+5;
+                sumofN=sumofN-5;
+            }
+            else
+            {
+                result[i]=result[i]+sumofN;
+                sumofN=0;
+                break;
+            }
+            i++;
+        }
+        if(sumofN>0)
+        {
+            return {};
+        }
+        return result;
+    }
+};
