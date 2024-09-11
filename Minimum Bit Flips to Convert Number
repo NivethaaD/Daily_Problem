@@ -1,0 +1,79 @@
+class Solution {
+public:
+
+    string findBits(int num)
+    {
+        string temp="";
+        while(num>0)
+        {
+            
+            temp=temp+to_string(num%2);
+            num=num/2;
+        }
+        return temp;
+    }
+    int minBitFlips(int start, int goal) {
+        string str1,str2;
+        str1=findBits(start);
+        str2=findBits(goal);
+        int steps=0;
+        cout<<str1<<" "<<str2<<endl;
+        if(str1.length()!=str2.length())
+        {
+            int sizeDiff=0;
+            string needToModify;
+            if(str1.length()>str2.length())
+            {
+                sizeDiff=str1.length()-str2.length();
+                needToModify=str2;
+                while(sizeDiff>0)
+                {
+                    needToModify.append("0");
+                    sizeDiff--;
+                }
+                for(int i=0;i<str1.length();i++)
+                {
+                    if(str1[i]!=needToModify[i])
+                    {
+                        steps++;
+                    }
+                }
+                cout<<str1<<" "<<needToModify<<endl;
+            }
+            else 
+            {
+                sizeDiff=str2.length()-str1.length();
+                needToModify=str1;
+                while(sizeDiff>0)
+                {
+                    needToModify.append("0");
+                    sizeDiff--;
+                }
+                for(int i=0;i<str2.length();i++)
+                {
+                    if(needToModify[i]!=str2[i])
+                    {
+                        steps++;
+                    }
+                }
+                cout<<needToModify<<" "<<str2<<endl;
+            }
+            
+        }
+        else
+        {
+            for(int i=0;i<str2.length();i++)
+                {
+                    if(str1[i]!=str2[i])
+                    {
+                        steps++;
+                    }
+                }
+                cout<<str1<<" "<<str2<<endl;
+        }
+
+return steps;
+
+
+    }
+};
