@@ -1,0 +1,9 @@
+class Solution:
+    def sumSubstrings(self,s):
+        n = len(s)
+        ans = 0
+        for i in range(0,n):
+            for j in range(i,n):
+                ele  = s[i:j+1]
+                ans = ans + int(ele)
+        return ans
