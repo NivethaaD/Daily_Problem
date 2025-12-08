@@ -1,0 +1,31 @@
+class Solution:
+    def beautySum(self, s: str) -> int:
+        n = len(s)
+        l = list()
+        ans = 0
+
+        for i in range(0,n):
+            for j in range(i,n):
+                ele  = s[i:j+1]
+                l.append(ele)
+
+        for temp in l:
+            d = dict()
+            if len(temp)==1:
+                continue
+            for i in temp:
+                if i in d:
+                    d[i]=d[i]+1
+                else:
+                    d[i]=1
+           
+            mini_key = min(d,key=d.get)
+            mini = d[mini_key]
+            max_key = max(d,key=d.get)
+            maxi = d[max_key]
+    
+            if maxi-mini != 0 :
+                ans = ans+(maxi-mini)
+
+        return ans
+            
